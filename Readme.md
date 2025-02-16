@@ -20,3 +20,4 @@ This Project is the part of my compiler construction course at **FAST-NUCES Isla
 - Handle multi-line comments properly, even in
   tricky situations.
 - Support for globals and local variables.
+- File extension **.nx**
