@@ -5,12 +5,14 @@ public class ReInputs {
 
     Set<String> set = new HashSet<>();
 
-    private  static  ReInputs reInputs;
+    private  static final ReInputs reInputs = new ReInputs();
     private ReInputs(){
         set.add("*");
         set.add("+");
         set.add("[");
         set.add("]");
+        set.add("{");
+        set.add("}");
         set.add("_main");
         set.add("_int");
         set.add("_print");

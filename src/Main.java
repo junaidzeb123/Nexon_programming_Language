@@ -21,8 +21,8 @@ public class Main {
         InfixtoPostFix converter = new InfixtoPostFix();
         String exp = "(_main|_int|_float|_char|_string|_true|_false|_print) |" +
                      " ([0-9])+ | (S) | (\\+|\\*|\\/|\\%|\\-|\\^) |" +
-                     "  (!&!&.&\\n)  | (!&-&-&.& -&-&!) |  (\"([^\"\\]|\\&.)*\") | ([a-z]+)";
-        converter.infixToPostfix(exp);
+                     "  (!&!&.&\\n)  | (!&-&-&.& -&-&!) |  (\"({N\"\\}|\\&.)*\") | ([a-z]+)";
+        System.out.println(converter.infixToPostfix(exp));
 
 //        if(!check_file_name(args[0])){
 //            System.out.println("file type not supported.");

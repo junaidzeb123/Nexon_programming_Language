@@ -30,17 +30,17 @@ class NFA {
         this.acceptingState = accepting;
     }
 
-    void manageUnion(String re){
+    void manageUnion(Stack<String> st){
 
     }
 
-    void manageCancatenation(String re){}
+    void manageConcatenation(Stack<String> st){}
 
-    void  manageKleeneClosure(String re){}
+    void  manageKleeneClosure(Stack<String> st){}
 
-    void  managePositiveClosure(String re){}
+    void  managePositiveClosure(Stack<String> st){}
 
-    private  Boolean isAlphaNeumeric(Character c){
+    private  Boolean isAlphaNumeric(Character c){
         return  (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') ;
     }
     // ACTUAL BACKBONE OF THE CLASS. WILL CONVERT RE TO NFA
@@ -55,7 +55,7 @@ class NFA {
 
             //  IT WILL BE AN RE INPUT CONSISTING OF SINGLE CHARACTER
             //  JUST PUT IT INTO THE STACK
-            if(isAlphaNeumeric(c)){
+            if(isAlphaNumeric(c)){
                 st.push(Character.toString(c));
             }
             //  A KEYWORD IS COMING
@@ -67,7 +67,23 @@ class NFA {
                 }
                 st.push(str.toString());
             }else if(c == '['){
-                
+                if(i + 4 >= postFix.length()){
+                    throw  new Error("Invalid RE. [] can only be used for range input.");
+                }
+                String str = postFix.substring(i, i + 4);
+                if(str.contains(" ") || (str.lastIndexOf("]") == -1)){
+                    throw  new Error("Invalid RE. [] can only be used for range input without any space.");
+                }
+                st.push(str);
+                i += 4;
+            }else if(c == '+'){
+                this.managePositiveClosure(st);
+            }else if (c == '*'){
+                this.manageKleeneClosure(st);
+            }else if (c == '|'){
+                this.manageUnion(st);
+            }else if(c == '&'){
+                this.manageConcatenation(st);
             }
 
         }
