@@ -1,96 +1,169 @@
-# Nexon
-**Inspiration** : Combines "next" and "on," suggesting forward-thinking and modern development.
+# fastLang: User Manual & Language Specification
 
-This Project is the part of my compiler construction course at **FAST-NUCES Islamabad**.
+## 1. Introduction
+fastLang is a simple programming language designed for educational purposes. It helps beginners learn basic programming concepts such as variable declarations, control flow, and input/output operations.
 
-## Rules
+## 2. Keywords
+fastLang supports the following reserved keywords:
 
-- It will be dynamically typed language.
-- **Types:**
-  - true/false values (Boolean)
-  - whole numbers (Integer)
-  - Decimal numbers (Decimal)
-  - Single letters (Character).
-- Variable Names lowercase letters (a to z)
-- Basic arithmetic operations like addition (+), subtraction (-), multiplication
-  (*), division (/), and remainder/modulus (%).
-- Accurate up to five decimal places
-- Support exponents (raising numbers to a power) for both whole numbers and decimal
-  numbers.
-- Handle multi-line comments properly, even in
-  tricky situations.
-- Support for globals and local variables.
-- File extension **.nx**
+| Keyword  | Description                        |
+| -------- | ----------------------------------- |
+| `int`    | Defines an integer variable         |
+| `float`  | Defines a floating-point variable   |
+| `bool`   | Defines a boolean variable          |
+| `string` | Defines a string variable           |
+| `if`     | Conditional statement               |
+| `else`   | Alternative block for `if`          |
+| `while`  | Looping construct                   |
+| `return` | Returns a value from a function     |
+| `true`   | Boolean literal (true)              |
+| `false`  | Boolean literal (false)             |
+| `print`  | Prints output to the console        |
+| `scanf`  | Reads input from the user           |
 
+## 3. Lexical Rules
+### 3.1 Identifiers
+- Must begin with a lowercase letter (a-z).
+- Can contain digits (0-9) after the first letter.
+- Cannot be a reserved keyword.
 
-## Keyword
-- main
-- int
-- float
-- char
-- string
-- true
-- false
-- print
+Example:
+```fastlang
+int myVar = 10;
+float myNumber = 3.14;
+```
 
-## Other Valid Tokens
-- int Numbers [0-9]
-- float Numbers [0-9].[0.9][0-9][0-9][0-9][0-9]
-- spaces 
-- Operator + * / % - ^
-- Single Line Comments !!(two exclamation marks)
-- Multi Line Comment !-- (Exclamation two dashes)
-- string as "*"
+### 3.2 Constants
+#### 3.2.1 Integer Constants
+- A sequence of digits (0-9).
+- Cannot have leading zeros unless 0 itself.
+- Example: `0, 42, 123`
 
+#### 3.2.2 Decimal Constants
+- Must contain a decimal point (.) with at least one digit before and after.
+- Example: `3.14, 0.5, 99.999`
 
-## Regular Symbols Just for reference
-- \b (Word Boundary)
-- \d (Digit
-- +(One or More)
-- ? (Optional / Zero or One)
-- +(Zero or More)
-- .(Dot / Any Character)
-- [] (Character Set)
-- [^ ]
-- \s (Whitespace)
-- (?: ) (Non-capturing Group)
-- | (Alternation / OR)
-- \* (Escape Sequence for Literal Characters)
-- \. (Escaping the Dot)
-- \S (Non-Whitespace Character)
-- \b (Word Boundary)
+#### 3.2.3 Boolean Constants
+- `true` or `false`.
 
-## Regular Expression for the Language
-(?x)(\b(print|int|float|double|main|char|true|false)|-?\b\d+\.\d+\b|-?\b\d+\b|\"(?:[^\"\\]|\\.)*\"|'(?:[^'\\]|\\.)*'|//.*|/\*[\s\S]*?\*/|\s+|\b[a-z]+\b|(\+|=|-|\*|%|^|;))
+#### 3.2.4 String Constants
+- Enclosed in double quotes (" ").
+- Example: `"Hello, world!"`
 
+#### 3.2.5 Character Constants
+- A single character enclosed in single quotes (' ').
+- Example: `'a', '5', '*'`
 
+### 3.3 Operators
+#### 3.3.1 Arithmetic Operators
 
-## Our Own Re
+| Operator | Description  |
+| -------- | ------------ |
+| `+`      | Addition     |
+| `-`      | Subtraction  |
+| `*`      | Multiplication|
+| `/`      | Division     |
+| `%`      | Modulus      |
 
-- . -> any thing
-- [] -> range
-- | union
-- ? -> 0 or one occurrence
-- !! -> single line comment
-- !-- double line comment
+#### 3.3.2 Relational Operators
 
+| Operator | Description             |
+| -------- | ----------------------- |
+| `==`     | Equal to                |
+| `!=`     | Not equal to            |
+| `>`      | Greater than            |
+| `<`      | Less than               |
+| `>=`     | Greater than or equal to|
+| `<=`     | Less than or equal to   |
 
-- Re for keywords -> (main|int|float|char|string|true|false|print)
-- int Numbers ([0-9])+
-- float Numbers (([0-9])+.([0-9])+)
-- spaces -> S
-- Operator  (+|*|/|%|-|^)
-- Single Line Comments   !!.
-- Multi Line Comment   !-- . --!
-- string as "*"  \"([^\"\\]|\\.)*\"
+#### 3.3.3 Logical Operators
 
+| Operator | Description       |
+| -------- | ----------------- |
+| `&&`     | Logical AND        |
+| `||`     | Logical OR         |
+| `!`      | Logical NOT        |
 
-By creating the union for all of the above
+#### 3.3.4 Assignment Operators
 
+| Operator | Description       |
+| -------- | ----------------- |
+| `=`      | Assign a value     |
 
+### 3.4 Grouping Symbols & Delimiters
 
+| Symbol | Description                           |
+| ------ | ------------------------------------- |
+| `()`   | Parentheses for function calls        |
+| `{}`   | Braces for block statements           |
+| `[]`   | Square brackets (reserved for future use) |
+| `;`    | Statement terminator                  |
+| `,`    | Separator for function arguments      |
 
-- (_main|_int|_float|_char|_string|_true|_false|_print) | ([0-9])+ | S | (\+|\*|\/|%|-|^) |  !!.\n  | !-- . --! |  \"([^\"\\]|\\.)*\" | ([a-z]+)
+### 3.5 Comments
+- **Single-line Comments:** Begin with `//` and continue until the end of the line.
+- **Multi-line Comments:** Start with `/*` and end with `*/`.
 
+Example:
+```fastlang
+// This is a single-line comment
+/* This is a
+multi-line comment */
+```
 
+## 4. Syntax Rules
+### 4.1 Variable Declarations
+```fastlang
+int x = 10;
+float y = 20.5;
+bool flag = true;
+string name = "John";
+```
+
+### 4.2 Conditional Statements
+```fastlang
+if (x > 0) {
+  print("Positive");
+} else {
+  print("Non-positive");
+}
+```
+
+### 4.3 Loops
+```fastlang
+while (x > 0) {
+  print(x);
+  x = x - 1;
+}
+```
+
+### 4.4 Function Calls
+```fastlang
+print("Hello, World!");
+scanf(x);
+```
+
+## 5. Using the Lexical Analyzer
+To analyze fastLang code:
+1. Run the Lexical Analyzer on your source file.
+2. Tokenize the input based on the rules above.
+3. Errors are reported for missing semicolons, undeclared variables, and invalid tokens.
+
+### Common Errors Detected
+
+| Error Type         | Example                                      |
+| ------------------ | -------------------------------------------- |
+| Undeclared variable | `y = 20.5;` (y was not declared)             |
+| Duplicate declaration | `int x = 10; int x = 5;`                  |
+| Unrecognized token  | `@x = 5;` (invalid character @)             |
+
+## 6. Example Program
+```fastlang
+int x = 10;
+float y = 20.5;
+int result = x + y;
+if (result > 20) {
+  print("Result is greater than 20");
+}
+```
 

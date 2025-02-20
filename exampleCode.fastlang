@@ -1,0 +1,21 @@
+int x = 10;
+int y = 20.5;
+int result = x + y;
+
+if (result > 20) {
+    printf("Result is greater than 20");
+} else {
+    printf("Result is less than or equal to 20");
+}
+
+
+while (x > 0) {
+    printf(x);
+    x = x - 1;
+}
+
+
+printf("Enter a number:");
+scanf(y);
+printf("You entered:");
+printf(y);
